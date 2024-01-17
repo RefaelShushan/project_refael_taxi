@@ -59,6 +59,7 @@ describe('TravelService', () => {
       (travelMoke.date = '16.7.24');
 
     repo.find = jest.fn().mockResolvedValue([travelMoke]);
+    repo.findById = jest.fn().mockResolvedValue(travelMoke);
   });
 
   it('should return an array of users', async () => {
@@ -71,12 +72,12 @@ describe('TravelService', () => {
 
   });
 
-  // it('should return a single user by ID', async () => {
-  //   const travelId = await service.findOne('d8d523ca-e664-4b15-b4f0-f3817b045335');
+  it('should return a single user by ID', async () => {
+    const travelId = await service.findOne('d8d523ca-e664-4b15-b4f0-f3817b045335');
 
-  //   expect(travelId).toEqual(travelMoke);
-  //   expect(travelId).toBeInstanceOf(Travel);
-  // });
+    expect(travelId).toEqual(travelMoke);
+    expect(travelId).toBeInstanceOf(Travel);
+  });
 });
 
 
