@@ -15,11 +15,12 @@ export class TravelService {
   }
 
   async findAll():Promise<Travel[]> {
-    return this.travelModel.find().exec();
+    return await this.travelModel.find();
+    
   }
 
-  async findOne(id: string): Promise<Travel> {
-    return this.travelModel.findById(id).exec();
+  async findOne(id: string) {
+    return await this.travelModel.findById(id);
   }
 
   async update(id: string, updateTravelDto: UpdateTravelDto): Promise<Travel> {
@@ -31,12 +32,12 @@ export class TravelService {
     return travel;
   }
   async remove(id: string) {
-    const cat = await this.travelModel.findByIdAndDelete(id);
+    const travel = await this.travelModel.findByIdAndDelete(id);
 
     // if (!cat) {
     //   throw new NotFoundException(`Cat with id ${id} not found`);
     // }
 
-    return cat;
+    return travel;
   }
 }

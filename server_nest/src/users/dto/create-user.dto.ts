@@ -1,23 +1,29 @@
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString ,Matches } from 'class-validator';
 
 export class CreateUserDto {
 
     id:string
 
-   @IsString()
-    firs_name: string;
   
     @IsString()
-    last_name: string;
+    name: string;
   
   
     age: number;
   
-    @IsEmail()
-    email: string;
+    @Matches(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/, {
+        message: 'email must be a valid email',
+      })
+      email: string;
   
-    @IsNotEmpty()
-    password: string;
+      @Matches(
+        /((?=.*\d{1})(?=.*[A-Z]{1})(?=.*[a-z]{1})(?=.*[!@#$%^&*-]{1}).{7,20})/,
+        {
+          message:
+            'Password must be at least nine characters long and contain an uppercase letter, a lowercase letter, a number and one of the following characters !@#$%^&*-',
+        },
+      )
+      password: string;
   
    
     is_admin: boolean;
