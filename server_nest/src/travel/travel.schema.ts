@@ -25,6 +25,9 @@ export class Travel {
 
   @Prop()
   amount: number;
+
+  @Prop()
+  status: string;
 }
 
 export const TravelSchema = SchemaFactory.createForClass(Travel);

@@ -4,6 +4,7 @@ import { UpdateTravelDto } from './dto/update-travel.dto';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Travel } from './travel.schema';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
 
 @Injectable()
 export class TravelService {

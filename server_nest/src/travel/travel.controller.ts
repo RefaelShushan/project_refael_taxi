@@ -2,13 +2,17 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { TravelService } from './travel.service';
 import { CreateTravelDto } from './dto/create-travel.dto';
 import { UpdateTravelDto } from './dto/update-travel.dto';
+import { CacheInterceptor } from '@nestjs/cache-manager';
+import { UseInterceptors } from '@nestjs/common/decorators';
 
 @Controller('travel')
+@UseInterceptors(CacheInterceptor)
 export class TravelController {
   constructor(private readonly travelService: TravelService) {}
 
   @Post()
   create(@Body() createTravelDto: CreateTravelDto) {
+    
     return this.travelService.create(createTravelDto);
   }
 
