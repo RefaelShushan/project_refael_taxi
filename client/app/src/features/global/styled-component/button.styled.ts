@@ -26,4 +26,8 @@ export const ButtonStyle = styled.button<ButtonType>`
   .hover-text {
     display: ${({ hoverTextDisplay }) => hoverTextDisplay || "#inline"};
   }
+
+  &:active {
+    transform: scale(0.99);
+  }
 `;

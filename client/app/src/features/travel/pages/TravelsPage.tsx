@@ -5,6 +5,9 @@ import { DivBox } from "../../global/styled-component/box.styled";
 import TravelPageHeader from "../component/TravelPageHeader";
 import TotalSelsAndGraph from "../component/TotalSelsAndGraph";
 import BadyTravelTable from "../component/BadyTravelTable";
+import ROUTES from "../../../routes/routeModel";
+import NavigationButton from "../../global/useNvigate/NavigationButton";
+import { ButtonStyle } from "../../global/styled-component/button.styled";
 
 export default function Home() {
   return (
@@ -26,6 +29,13 @@ export default function Home() {
         <Container style={{ paddingTop: 12 }}>
           <Grid container spacing={3}>
             <TotalSelsAndGraph />
+            <DivBox way="column" width="100%" padding="30px" margin="20px">
+              <ButtonStyle>
+                <NavigationButton to={ROUTES.ADDNEWTRAVEL}>
+                  add New Travel
+                </NavigationButton>
+              </ButtonStyle>
+            </DivBox>
             <BadyTravelTable />
           </Grid>
         </Container>

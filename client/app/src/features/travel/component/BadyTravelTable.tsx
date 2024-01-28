@@ -1,5 +1,5 @@
 import { DivBox } from "../../global/styled-component/box.styled";
-import TableComponentTravel from "./TableTravel";
+import TableComponentTravel from "./TableComponentTravel";
 
 export default function BadyTravelTable() {
   return (

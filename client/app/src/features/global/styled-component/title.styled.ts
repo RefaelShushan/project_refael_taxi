@@ -8,5 +8,5 @@ export const Title = styled.div`
   line-height: 1.6;
   line-height: 0.0075em;
   margin-bottom: 0.35em;
-  color: #1976d2;
+  color: #3498db;
 `;

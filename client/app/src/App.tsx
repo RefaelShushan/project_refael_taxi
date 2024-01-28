@@ -4,6 +4,7 @@ import Layout from "./features/global/layout/Layout";
 import SignIn from "./features/TaxiDriver/pages/SignInPage";
 import Home from "./features/travel/pages/TravelsPage";
 // import {  ThemeProvider }from "styled-components"
+import Router from "./routes/Router";
 
 function App() {
   // const theme = {
@@ -14,7 +15,7 @@ function App() {
   //   }
   // }
 
-  return <Home />;
+  return <Router />;
   //   return (
   //     <>
   //       <BrowserRouter>
