@@ -18,6 +18,7 @@
     "@mui/material": "^5.15.2",
     "@mui/styled-engine-sc": "^6.0.0-alpha.10",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "axios": "^1.6.7",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",

@@ -7,113 +7,52 @@ import {
 } from "../../global/styled-component/table.styled";
 import { ButtonStyle } from "../../global/styled-component/button.styled";
 import { Title } from "../../global/styled-component/title.styled";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { json } from "react-router-dom";
 
-function createData(
-  id: number,
-  date: string,
-  name: string,
-  port_address: string,
-  arrival_address: string,
-  cellphone_number: string,
-  amount: number
-) {
-  return {
-    id,
-    date,
-    name,
-    port_address,
-    arrival_address,
-    cellphone_number,
-    amount,
-  };
+interface data {
+  _id: string;
+  date: string;
+  name: string;
+  port_address: string;
+  arrival_address: string;
+  cellphone_number: string;
+  amount: number;
+  status: string;
 }
 
-const rows = [
-  createData(
-    0,
-    "16 Mar, 2019",
-    "Elvis Presley",
-    "Tupelo, MS",
-    "ptch tcva",
-    "05448562355",
-    312.44
-  ),
-  createData(
-    1,
-    "16 Mar, 2019",
-    "Paul McCartney",
-    "London, UK",
-    "VISA ",
-    "05448562355",
-    866.99
-  ),
-  createData(
-    2,
-    "16 Mar, 2019",
-    "Tom Scholz",
-    "Boston, MA",
-    "MC ⠀•••• 1253",
-    "05448562355",
-    100.81
-  ),
-  createData(
-    3,
-    "16 Mar, 2019",
-    "Michael Jackson",
-    "Gary, IN",
-    "AMEX ⠀•••• 2000",
-    "05448562355",
-    654.39
-  ),
-  createData(
-    4,
-    "15 Mar, 2019",
-    "Bruce Springsteen",
-    "Long Branch, NJ",
-    "VISA ⠀•••• 5919",
-    "05448562355",
-    212.79
-  ),
-  createData(
-    4,
-    "15 Mar, 2019",
-    "Bruce Springsteen",
-    "Long Branch, NJ",
-    "VISA ⠀•••• 5919",
-    "05448562355",
-    212.79
-  ),
-  createData(
-    4,
-    "15 Mar, 2019",
-    "Bruce Springsteen",
-    "Long Branch, NJ",
-    "VISA ⠀•••• 5919",
-    "05448562355",
-    212.79
-  ),
-  createData(
-    0,
-    "16 Mar, 2019",
-    "Elvis Presley",
-    "Tupelo, MS",
-    "ptch tcva",
-    "05448562355",
-    312.44
-  ),
-  createData(
-    0,
-    "16 Mar, 2019",
-    "Elvis Presley",
-    "Tupelo, MS",
-    "ptch tcva",
-    "05448562355",
-    312.44
-  ),
-];
+const handleStatusUpdate = async (id: string) => {
+  try {
+    const statusToSet = "in travel";
+    await axios.put(`http://localhost:3000/travel/${id}`, {
+      status: statusToSet,
+    });
+  } catch (error) {
+    console.error("Server error while updating data:", error);
+  }
+};
 
 export default function TableComponentTravel() {
-  //   const [hoverText, setHoverText] = useState("Hover Text");
+  const [travelData, setTravelData] = useState<data[]>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/travel/");
+        setTravelData(response.data);
+      } catch (error) {
+        console.error("server error get data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // const filteredTravelData = travelData?.filter(
+  //   (row) => row.status === "on hold"
+  // );
+
   return (
     <>
       <Title>
@@ -132,16 +71,19 @@ export default function TableComponentTravel() {
           </TableRow>
         </thead>
         <tbody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
+          {travelData?.map((row) => (
+            <TableRow key={row._id}>
               <TableCell>{row.date}</TableCell>
               <TableCell>{row.name}</TableCell>
               <TableCell>{row.port_address}</TableCell>
               <TableCell>{row.arrival_address}</TableCell>
               <TableCell>{row.cellphone_number}</TableCell>
               <TableCell>{`$${row.amount}`}</TableCell>
-              <TableCell align="right">
-                <ButtonStyle background="rgb(66, 189, 66)">
+              <TableCell>
+                <ButtonStyle
+                  background="rgb(66, 189, 66)"
+                  onClick={() => handleStatusUpdate(row._id)}
+                >
                   on hold..
                 </ButtonStyle>
               </TableCell>
